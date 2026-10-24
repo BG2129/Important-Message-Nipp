@@ -1,0 +1,1136 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nipp Give U Important Information</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" href="images/kuning-biru-baru.png">
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+          },
+          colors: {
+            brand: {
+              blue: '#0066FF',
+              dark: '#0A1E40',
+              light: '#EBF4FF',
+              bg: '#F4F9FF',
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body {
+      background: linear-gradient(180deg, #F0F7FF 0%, #E6F0FE 100%);
+      min-height: 100vh;
+    }
+    .glass-card {
+      background: rgba(255, 255, 255, 0.75);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(190, 219, 255, 0.6);
+    }
+    .glass-dock {
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(190, 219, 255, 0.8);
+    }
+    /* Animasi getar halus untuk tombol donasi */
+    @keyframes wiggle {
+      0%, 100% { transform: rotate(-3deg); }
+      50% { transform: rotate(3deg); }
+    }
+    .hover-wiggle:hover {
+      animation: wiggle 0.8s ease-in-out infinite;
+    }
+  </style>
+</head>
+<body class="font-sans text-slate-800 antialiased pb-32">
+
+  <!-- HERO SECTION -->
+  <section class="max-w-4xl mx-auto px-4 sm:px-8 pt-10 pb-8">
+    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-100/70 text-blue-700 text-xs font-bold tracking-widest uppercase mb-6">
+      <span class="w-1.5 h-1.5 rounded-full bg-blue-600"></span>
+      Informasi Seputar TKA, SNBT & Materi Sekolah
+    </div>
+    
+    <div class="flex justify-between items-start gap-6">
+      <div>
+        <h1 class="text-4xl sm:text-6xl font-extrabold tracking-tight text-slate-900 leading-tight">
+          Important information.<br />
+          <span class="text-brand-blue">from Nipp.</span>
+        </h1>
+        <p class="mt-4 text-slate-600 text-base sm:text-lg max-w-xl leading-relaxed font-normal">
+          Info mengenai contoh soal dan materi TKA, SNBT, serta Mapel Sekolah
+        </p>
+      </div>
+      <button onclick="scrollToSearch()" class="hidden sm:flex w-12 h-12 rounded-full bg-white border border-blue-200 text-brand-blue items-center justify-center shadow-sm hover:bg-blue-50 transition-colors">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+      </button>
+    </div>
+
+    <!-- STATS ROW -->
+    <div class="flex items-center gap-8 mt-10 text-xs font-bold tracking-widest text-slate-500 uppercase">
+      <div><span class="text-slate-900 font-extrabold mr-1">3</span> Soal TKA Wajib</div>
+      <div><span class="text-slate-900 font-extrabold mr-1">11</span> Soal TKA Pilihan</div>
+      <div><span class="text-slate-900 font-extrabold mr-1">13</span> Materi ASTS</div>
+      <div><span class="text-slate-900 font-extrabold mr-1">2</span>LatSol TKA SMA</div>
+      <div><span class="text-slate-900 font-extrabold mr-1">5</span>Materi & Video Penjelasan</div>
+    </div>
+  </section>
+
+  <!-- SEARCH & FILTER BAR -->
+  <section id="search-section" class="max-w-4xl mx-auto px-4 sm:px-8 mb-6">
+    <div class="glass-card rounded-2xl p-4 shadow-sm">
+      <div class="relative mb-3">
+        <svg class="w-5 h-5 absolute left-3.5 top-3.5 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+        <input 
+          type="text" 
+          id="searchInput" 
+          placeholder="Search the intelligence hub..." 
+          class="w-full pl-11 pr-4 py-2.5 bg-blue-50/50 border border-blue-100 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-brand-blue focus:bg-white transition-all text-slate-800 placeholder-slate-400"
+        />
+      </div>
+
+      <!-- FILTER PILLS -->
+      <div class="flex flex-wrap gap-2" id="filterContainer">
+        <button data-filter="all" class="filter-btn px-4 py-1.5 rounded-lg text-sm font-semibold bg-brand-blue text-white shadow-sm transition-all">All</button>
+        <button data-filter="WAJIB" class="filter-btn px-4 py-1.5 rounded-lg text-sm font-semibold bg-blue-100/50 text-slate-600 hover:bg-blue-100 transition-all">Soal Wajib</button>
+        <button data-filter="PILIHAN" class="filter-btn px-4 py-1.5 rounded-lg text-sm font-semibold bg-blue-100/50 text-slate-600 hover:bg-blue-100 transition-all">Soal Pilihan</button>
+        <button data-filter="ASTS" class="filter-btn px-4 py-1.5 rounded-lg text-sm font-semibold bg-blue-100/50 text-slate-600 hover:bg-blue-100 transition-all">Materi ASTS</button>
+        <button data-filter="LATSOL" class="filter-btn px-4 py-1.5 rounded-lg text-sm font-semibold bg-blue-100/50 text-slate-600 hover:bg-blue-100 transition-all">LatSol TKA</button>
+        <button data-filter="VIDEO" class="filter-btn px-4 py-1.5 rounded-lg text-sm font-semibold bg-blue-100/50 text-slate-600 hover:bg-blue-100 transition-all">Video Materi</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- NOTIFICATION LIST -->
+  <main class="max-w-4xl mx-auto px-4 sm:px-8 space-y-4" id="notificationList">
+    
+    <!-- Card 1: Soal Wajib -->
+    <article class="notif-card glass-card rounded-2xl p-6 transition-all hover:shadow-md border-l-4 border-l-rose-500" data-category="WAJIB">
+      <div class="flex flex-wrap items-center justify-between gap-2 text-xs font-bold tracking-wider mb-2">
+        <span class="text-rose-600 uppercase flex items-center gap-1.5">
+          <span class="w-2 h-2 rounded-full bg-rose-500"></span> SOAL WAJIB
+        </span>
+        <div class="text-slate-400">2025 &bull; <span class="text-slate-700 font-extrabold">B. INDO</span></div>
+      </div>
+      <h2 class="text-xl font-bold text-slate-900 mb-2">Soal TKA Bahasa Indonesia Wajib</h2>
+      <p class="text-slate-600 text-sm leading-relaxed mb-6">
+        SOAL TKA SMA/MA/SMK TAHUN 2025
+      </p>
+      <div class="flex flex-wrap items-center justify-between pt-4 border-t border-blue-100/60 text-xs">
+        <span class="text-slate-500 font-medium">Destination &bull; Soal TKA Bahasa Indonesia</span>
+        <button onclick="openModal('Soal TKA Bahasa Indonesia', 'https://drive.google.com/file/d/11jG1A9WE8iU4BXThqrXTECL_Pa4XRvkL/view')" class="text-brand-blue font-bold flex items-center gap-1 hover:underline">
+          Open source
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+        </button>
+      </div>
+    </article>
+
+    <!-- Card 2: Soal Wajib -->
+    <article class="notif-card glass-card rounded-2xl p-6 transition-all hover:shadow-md border-l-4 border-l-rose-500" data-category="WAJIB">
+      <div class="flex flex-wrap items-center justify-between gap-2 text-xs font-bold tracking-wider mb-2">
+        <span class="text-rose-600 uppercase flex items-center gap-1.5">
+          <span class="w-2 h-2 rounded-full bg-rose-500"></span> SOAL WAJIB
+        </span>
+        <div class="text-slate-400">2025 &bull; <span class="text-slate-700 font-extrabold">B. INGGRIS</span></div>
+      </div>
+      <h2 class="text-xl font-bold text-slate-900 mb-2">Soal TKA Bahasa Inggris Wajib</h2>
+      <p class="text-slate-600 text-sm leading-relaxed mb-6">
+        SOAL TKA SMA/MA/SMK TAHUN 2025
+      </p>
+      <div class="flex flex-wrap items-center justify-between pt-4 border-t border-blue-100/60 text-xs">
+        <span class="text-slate-500 font-medium">Destination &bull; Soal TKA Bahasa Inggris</span>
+        <button onclick="openModal('Soal TKA Bahasa Inggris', 'https://drive.google.com/file/d/1UizwTZWXp9EX6IKOdUQZDeKiy_y1q2CR/view')" class="text-brand-blue font-bold flex items-center gap-1 hover:underline">
+          Open source
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+        </button>
+      </div>
+    </article>
+
+    <!-- Card 3: Soal Wajib -->
+    <article class="notif-card glass-card rounded-2xl p-6 transition-all hover:shadow-md border-l-4 border-l-rose-500" data-category="WAJIB">
+      <div class="flex flex-wrap items-center justify-between gap-2 text-xs font-bold tracking-wider mb-2">
+        <span class="text-rose-600 uppercase flex items-center gap-1.5">
+          <span class="w-2 h-2 rounded-full bg-rose-500"></span> SOAL WAJIB
+        </span> 
+        <div class="text-slate-400">2025 &bull; <span class="text-slate-700 font-extrabold">MATEMATIKA</span></div>
+      </div>
+      <h2 class="text-xl font-bold text-slate-900 mb-2">Soal TKA Matematika Wajib</h2>
+      <p class="text-slate-600 text-sm leading-relaxed mb-6">
+        SOAL TKA SMA/MA/SMK TAHUN 2025
+      </p>
+      <div class="flex flex-wrap items-center justify-between pt-4 border-t border-blue-100/60 text-xs">
+        <span class="text-slate-500 font-medium">Destination &bull; Soal TKA Matematika</span>
+        <button onclick="openModal('Soal TKA Matematika', 'https://drive.google.com/file/d/1ulrVfOUNJqE4oFV63tu-GOgkesSZx_bL/view')" class="text-brand-blue font-bold flex items-center gap-1 hover:underline">
+          Open source
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+        </button>
+      </div>
+    </article>
+
+
+
+    <!-- Card 1: Soal Pilihan -->
+    <article class="notif-card glass-card rounded-2xl p-6 transition-all hover:shadow-md border-l-4 border-l-brand-blue" data-category="PILIHAN">
+      <div class="flex flex-wrap items-center justify-between gap-2 text-xs font-bold tracking-wider mb-2">
+        <span class="text-brand-blue uppercase flex items-center gap-1.5">
+          <span class="w-2 h-2 rounded-full bg-brand-blue"></span> SOAL PILIHAN
+        </span>
+        <div class="text-slate-400">2025 &bull; <span class="text-slate-700 font-extrabold">B. INDO PILIHAN</span></div>
+      </div>
+      <h2 class="text-xl font-bold text-slate-900 mb-2">Soal TKA Bahasa Indonesia Pilihan</h2>
+      <p class="text-slate-600 text-sm leading-relaxed mb-6">
+        SOAL TKA SMA/MA/SMK TAHUN 2025
+      </p>
+      <div class="flex flex-wrap items-center justify-between pt-4 border-t border-blue-100/60 text-xs">
+        <span class="text-slate-500 font-medium">Destination &bull; Soal TKA Bahasa Indonesia Pilihan</span>
+        <button onclick="openModal('Soal TKA Bahasa Indonesia Pilihan', 'https://drive.google.com/file/d/1CziaZLn7_NzRyvjaWw7u1UhJIUj885hL/view')" class="text-brand-blue font-bold flex items-center gap-1 hover:underline">
+          Open source
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+        </button>
+      </div>
+    </article>
+
+    <!-- Card 2: Soal Pilihan -->
+    <article class="notif-card glass-card rounded-2xl p-6 transition-all hover:shadow-md border-l-4 border-l-brand-blue" data-category="PILIHAN">
+      <div class="flex flex-wrap items-center justify-between gap-2 text-xs font-bold tracking-wider mb-2">
+        <span class="text-brand-blue uppercase flex items-center gap-1.5">
+          <span class="w-2 h-2 rounded-full bg-brand-blue"></span> SOAL PILIHAN
+        </span>
+        <div class="text-slate-400">2025 &bull; <span class="text-slate-700 font-extrabold">B. INGGRIS PILIHAN</span></div>
+      </div>
+      <h2 class="text-xl font-bold text-slate-900 mb-2">Soal TKA Bahasa Inggris Pilihan</h2>
+      <p class="text-slate-600 text-sm leading-relaxed mb-6">
+        SOAL TKA SMA/MA/SMK TAHUN 2025
+      </p>
+      <div class="flex flex-wrap items-center justify-between pt-4 border-t border-blue-100/60 text-xs">
+        <span class="text-slate-500 font-medium">Destination &bull; Soal TKA Bahasa Inggris Pilihan</span>
+        <button onclick="openModal('Soal TKA Bahasa Inggris Pilihan', 'https://drive.google.com/file/d/1jun2TvbY9BMjx1X4TH_ZnyH2b8F1nR0I/view')" class="text-brand-blue font-bold flex items-center gap-1 hover:underline">
+          Open source
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+        </button>
+      </div>
+    </article>
+
+    <!-- Card 3: Soal Pilihan -->
+    <article class="notif-card glass-card rounded-2xl p-6 transition-all hover:shadow-md border-l-4 border-l-brand-blue" data-category="PILIHAN">
+      <div class="flex flex-wrap items-center justify-between gap-2 text-xs font-bold tracking-wider mb-2">
+        <span class="text-brand-blue uppercase flex items-center gap-1.5">
+          <span class="w-2 h-2 rounded-full bg-brand-blue"></span> SOAL PILIHAN
+        </span>
+        <div class="text-slate-400">2025 &bull; <span class="text-slate-700 font-extrabold">MATEMATIKA PILIHAN</span></div>
+      </div>
+      <h2 class="text-xl font-bold text-slate-900 mb-2">Soal TKA Matematika Pilihan</h2>
+      <p class="text-slate-600 text-sm leading-relaxed mb-6">
+        SOAL TKA SMA/MA/SMK TAHUN 2025
+      </p>
+      <div class="flex flex-wrap items-center justify-between pt-4 border-t border-blue-100/60 text-xs">
+        <span class="text-slate-500 font-medium">Destination &bull; Soal TKA Matematika Pilihan</span>
+        <button onclick="openModal('Soal TKA Matematika Pilihan', 'https://drive.google.com/file/d/1vuoprVI88kZppNW2zrW_i5kH6cRoSNge/view')" class="text-brand-blue font-bold flex items-center gap-1 hover:underline">
+          Open source
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+        </button>
+      </div>
+    </article>
+
+    <!-- Card 4: Soal Pilihan -->
+    <article class="notif-card glass-card rounded-2xl p-6 transition-all hover:shadow-md border-l-4 border-l-brand-blue" data-category="PILIHAN">
+      <div class="flex flex-wrap items-center justify-between gap-2 text-xs font-bold tracking-wider mb-2">
+        <span class="text-brand-blue uppercase flex items-center gap-1.5">
+          <span class="w-2 h-2 rounded-full bg-brand-blue"></span> SOAL PILIHAN
+        </span>
+        <div class="text-slate-400">2025 &bull; <span class="text-slate-700 font-extrabold">BIOLOGI PILIHAN</span></div>
+      </div>
+      <h2 class="text-xl font-bold text-slate-900 mb-2">Soal TKA Biologi Pilihan</h2>
+      <p class="text-slate-600 text-sm leading-relaxed mb-6">
+        SOAL TKA SMA/MA/SMK TAHUN 2025
+      </p>
+      <div class="flex flex-wrap items-center justify-between pt-4 border-t border-blue-100/60 text-xs">
+        <span class="text-slate-500 font-medium">Destination &bull; Soal TKA Biologi Pilihan</span>
+        <button onclick="openModal('Soal TKA Biologi Pilihan', 'https://drive.google.com/file/d/12LPPseLSnjNwZmKIkfyRejD3UuFUphIm/view')" class="text-brand-blue font-bold flex items-center gap-1 hover:underline">
+          Open source
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+        </button>
+      </div>
+    </article>
+
+    <!-- Card 5: Soal Pilihan -->
+    <article class="notif-card glass-card rounded-2xl p-6 transition-all hover:shadow-md border-l-4 border-l-brand-blue" data-category="PILIHAN">
+      <div class="flex flex-wrap items-center justify-between gap-2 text-xs font-bold tracking-wider mb-2">
+        <span class="text-brand-blue uppercase flex items-center gap-1.5">
+          <span class="w-2 h-2 rounded-full bg-brand-blue"></span> SOAL PILIHAN
+        </span>
+        <div class="text-slate-400">2025 &bull; <span class="text-slate-700 font-extrabold">EKONOMI PILIHAN</span></div>
+      </div>
+      <h2 class="text-xl font-bold text-slate-900 mb-2">Soal TKA Ekonomi Pilihan</h2>
+      <p class="text-slate-600 text-sm leading-relaxed mb-6">
+        SOAL TKA SMA/MA/SMK TAHUN 2025
+      </p>
+      <div class="flex flex-wrap items-center justify-between pt-4 border-t border-blue-100/60 text-xs">
+        <span class="text-slate-500 font-medium">Destination &bull; Soal TKA Ekonomi Pilihan</span>
+        <button onclick="openModal('Soal TKA Ekonomi Pilihan', 'https://drive.google.com/file/d/1WRHxJu2IvQDwNN-6M9qqFe9Lbf87cb4t/view')" class="text-brand-blue font-bold flex items-center gap-1 hover:underline">
+          Open source
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+        </button>
+      </div>
+    </article>
+
+    <!-- Card 6: Soal Pilihan -->
+    <article class="notif-card glass-card rounded-2xl p-6 transition-all hover:shadow-md border-l-4 border-l-brand-blue" data-category="PILIHAN">
+      <div class="flex flex-wrap items-center justify-between gap-2 text-xs font-bold tracking-wider mb-2">
+        <span class="text-brand-blue uppercase flex items-center gap-1.5">
+          <span class="w-2 h-2 rounded-full bg-brand-blue"></span> SOAL PILIHAN
+        </span>
+        <div class="text-slate-400">2025 &bull; <span class="text-slate-700 font-extrabold">FISIKA PILIHAN</span></div>
+      </div>
+      <h2 class="text-xl font-bold text-slate-900 mb-2">Soal TKA Fisika Pilihan</h2>
+      <p class="text-slate-600 text-sm leading-relaxed mb-6">
+        SOAL TKA SMA/MA/SMK TAHUN 2025
+      </p>
+      <div class="flex flex-wrap items-center justify-between pt-4 border-t border-blue-100/60 text-xs">
+        <span class="text-slate-500 font-medium">Destination &bull; Soal TKA Fisika Pilihan</span>
+        <button onclick="openModal('Soal TKA Fisika Pilihan', 'https://drive.google.com/file/d/1D0v8L-3fqVEWsC0W2barKC0wB7qms9Bi/view')" class="text-brand-blue font-bold flex items-center gap-1 hover:underline">
+          Open source
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+        </button>
+      </div>
+    </article>
+
+    <!-- Card 7: Soal Pilihan -->
+    <article class="notif-card glass-card rounded-2xl p-6 transition-all hover:shadow-md border-l-4 border-l-brand-blue" data-category="PILIHAN">
+      <div class="flex flex-wrap items-center justify-between gap-2 text-xs font-bold tracking-wider mb-2">
+        <span class="text-brand-blue uppercase flex items-center gap-1.5">
+          <span class="w-2 h-2 rounded-full bg-brand-blue"></span> SOAL PILIHAN
+        </span>
+        <div class="text-slate-400">2025 &bull; <span class="text-slate-700 font-extrabold">GEOGRAFI PILIHAN</span></div>
+      </div>
+      <h2 class="text-xl font-bold text-slate-900 mb-2">Soal TKA Geografi Pilihan</h2>
+      <p class="text-slate-600 text-sm leading-relaxed mb-6">
+        SOAL TKA SMA/MA/SMK TAHUN 2025
+      </p>
+      <div class="flex flex-wrap items-center justify-between pt-4 border-t border-blue-100/60 text-xs">
+        <span class="text-slate-500 font-medium">Destination &bull; Soal TKA Geografi Pilihan</span>
+        <button onclick="openModal('Soal TKA Geografi Pilihan', 'https://drive.google.com/file/d/1Rukc7rmPhj2UheBywc-mf7E_yR0hTFVl/view')" class="text-brand-blue font-bold flex items-center gap-1 hover:underline">
+          Open source
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+        </button>
+      </div>
+    </article>
+
+    <!-- Card 8: Soal Pilihan -->
+    <article class="notif-card glass-card rounded-2xl p-6 transition-all hover:shadow-md border-l-4 border-l-brand-blue" data-category="PILIHAN">
+      <div class="flex flex-wrap items-center justify-between gap-2 text-xs font-bold tracking-wider mb-2">
+        <span class="text-brand-blue uppercase flex items-center gap-1.5">
+          <span class="w-2 h-2 rounded-full bg-brand-blue"></span> SOAL PILIHAN
+        </span>
+        <div class="text-slate-400">2025 &bull; <span class="text-slate-700 font-extrabold">KIMIA PILIHAN</span></div>
+      </div>
+      <h2 class="text-xl font-bold text-slate-900 mb-2">Soal TKA Kimia Pilihan</h2>
+      <p class="text-slate-600 text-sm leading-relaxed mb-6">
+        SOAL TKA SMA/MA/SMK TAHUN 2025
+      </p>
+      <div class="flex flex-wrap items-center justify-between pt-4 border-t border-blue-100/60 text-xs">
+        <span class="text-slate-500 font-medium">Destination &bull; Soal TKA Kimia Pilihan</span>
+        <button onclick="openModal('Soal TKA Kimia Pilihan', 'https://drive.google.com/file/d/1WBIr1jddvkh9CGoPv6xyo3Ta2tZoLAP3/view')" class="text-brand-blue font-bold flex items-center gap-1 hover:underline">
+          Open source
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+        </button>
+      </div>
+    </article>
+
+    <!-- Card 9: Soal Pilihan -->
+    <article class="notif-card glass-card rounded-2xl p-6 transition-all hover:shadow-md border-l-4 border-l-brand-blue" data-category="PILIHAN">
+      <div class="flex flex-wrap items-center justify-between gap-2 text-xs font-bold tracking-wider mb-2">
+        <span class="text-brand-blue uppercase flex items-center gap-1.5">
+          <span class="w-2 h-2 rounded-full bg-brand-blue"></span> SOAL PILIHAN
+        </span>
+        <div class="text-slate-400">2025 &bull; <span class="text-slate-700 font-extrabold">PPKN PILIHAN</span></div>
+      </div>
+      <h2 class="text-xl font-bold text-slate-900 mb-2">Soal TKA PPKN Pilihan</h2>
+      <p class="text-slate-600 text-sm leading-relaxed mb-6">
+        SOAL TKA SMA/MA/SMK TAHUN 2025
+      </p>
+      <div class="flex flex-wrap items-center justify-between pt-4 border-t border-blue-100/60 text-xs">
+        <span class="text-slate-500 font-medium">Destination &bull; Soal TKA PPKN Pilihan</span>
+        <button onclick="openModal('Soal TKA PPKN Pilihan', 'https://drive.google.com/file/d/1ns6wVWlaBcZJYMF9iWrI4oG-YQuEq_JG/view')" class="text-brand-blue font-bold flex items-center gap-1 hover:underline">
+          Open source
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+        </button>
+      </div>
+    </article>
+
+    <!-- Card 10: Soal Pilihan -->
+    <article class="notif-card glass-card rounded-2xl p-6 transition-all hover:shadow-md border-l-4 border-l-brand-blue" data-category="PILIHAN">
+      <div class="flex flex-wrap items-center justify-between gap-2 text-xs font-bold tracking-wider mb-2">
+        <span class="text-brand-blue uppercase flex items-center gap-1.5">
+          <span class="w-2 h-2 rounded-full bg-brand-blue"></span> SOAL PILIHAN
+        </span>
+        <div class="text-slate-400">2025 &bull; <span class="text-slate-700 font-extrabold">SEJARAH PILIHAN</span></div>
+      </div>
+      <h2 class="text-xl font-bold text-slate-900 mb-2">Soal TKA Sejarah Pilihan</h2>
+      <p class="text-slate-600 text-sm leading-relaxed mb-6">
+        SOAL TKA SMA/MA/SMK TAHUN 2025
+      </p>
+      <div class="flex flex-wrap items-center justify-between pt-4 border-t border-blue-100/60 text-xs">
+        <span class="text-slate-500 font-medium">Destination &bull; Soal TKA Sejarah Pilihan</span>
+        <button onclick="openModal('Soal TKA Sejarah Pilihan', 'https://drive.google.com/file/d/1425CRMf0OkEVTej6mb2LZpOjei6OBZcu/view')" class="text-brand-blue font-bold flex items-center gap-1 hover:underline">
+          Open source
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+        </button>
+      </div>
+    </article>
+
+    <!-- Card 11: Soal Pilihan -->
+    <article class="notif-card glass-card rounded-2xl p-6 transition-all hover:shadow-md border-l-4 border-l-brand-blue" data-category="PILIHAN">
+      <div class="flex flex-wrap items-center justify-between gap-2 text-xs font-bold tracking-wider mb-2">
+        <span class="text-brand-blue uppercase flex items-center gap-1.5">
+          <span class="w-2 h-2 rounded-full bg-brand-blue"></span> SOAL PILIHAN
+        </span>
+        <div class="text-slate-400">2025 &bull; <span class="text-slate-700 font-extrabold">SOSIOLOGI PILIHAN</span></div>
+      </div>
+      <h2 class="text-xl font-bold text-slate-900 mb-2">Soal TKA Sosiologi Pilihan</h2>
+      <p class="text-slate-600 text-sm leading-relaxed mb-6">
+        SOAL TKA SMA/MA/SMK TAHUN 2025
+      </p>
+      <div class="flex flex-wrap items-center justify-between pt-4 border-t border-blue-100/60 text-xs">
+        <span class="text-slate-500 font-medium">Destination &bull; Soal TKA Sosiologi Pilihan</span>
+          <button onclick="openModal('Soal TKA SOSIOLOGI Pilihan', 'https://drive.google.com/file/d/1teMfqJ0GP6zqE4-Y1sgcEpknW4lMRgy4/view')" class="text-brand-blue font-bold flex items-center gap-1 hover:underline">
+            Open source
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+        </button>
+      </div>
+    </article>
+
+
+
+<!-- Card 1: ASTS -->
+    <article class="notif-card glass-card rounded-2xl p-6 transition-all hover:shadow-md border-l-4 border-l-purple-500" data-category="ASTS">
+      <div class="flex flex-wrap items-center justify-between gap-2 text-xs font-bold tracking-wider mb-2">
+        <span class="text-purple-600 uppercase flex items-center gap-1.5">
+          <span class="w-2 h-2 rounded-full bg-purple-500"></span> Materi ASTS
+        </span>
+        <div class="text-slate-400">2026 &bull; <span class="text-slate-700 font-extrabold">Materi ASTS</span></div>
+      </div>
+      <h2 class="text-xl font-bold text-slate-900 mb-2">Materi Bahasa Indonesia</h2>
+      <p class="text-slate-600 text-sm leading-relaxed mb-6">
+        Materi persiapan ASTS 2026/2027 SMT 1
+      </p>
+      <div class="flex flex-wrap items-center justify-between pt-4 border-t border-purple-100/60 text-xs">
+        <span class="text-slate-500 font-medium">Destination &bull; Bahasa Indonesia</span>
+        <button onclick="openModal('Materi', 'https://bg2129.github.io/BIndo/')" class="text-brand-purple font-bold flex items-center gap-1 hover:underline">
+          Open source
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+        </button>
+      </div>
+    </article>
+
+    <!-- Card 2: ASTS -->
+    <article class="notif-card glass-card rounded-2xl p-6 transition-all hover:shadow-md border-l-4 border-l-purple-500" data-category="ASTS">
+      <div class="flex flex-wrap items-center justify-between gap-2 text-xs font-bold tracking-wider mb-2">
+        <span class="text-purple-600 uppercase flex items-center gap-1.5">
+          <span class="w-2 h-2 rounded-full bg-purple-500"></span> Materi ASTS
+        </span>
+        <div class="text-slate-400">2026 &bull; <span class="text-slate-700 font-extrabold">Materi ASTS</span></div>
+      </div>
+      <h2 class="text-xl font-bold text-slate-900 mb-2">Materi Biologi</h2>
+      <p class="text-slate-600 text-sm leading-relaxed mb-6">
+        Materi persiapan ASTS 2026/2027 SMT 1
+      </p>
+      <div class="flex flex-wrap items-center justify-between pt-4 border-t border-purple-100/60 text-xs">
+        <span class="text-slate-500 font-medium">Destination &bull; Biologi</span>
+        <button onclick="openModal('Materi', 'https://bg2129.github.io/WesWayaheSinau/')" class="text-brand-purple font-bold flex items-center gap-1 hover:underline">
+          Open source
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+        </button>
+      </div>
+    </article>
+
+        <!-- Card 3: ASTS -->
+    <article class="notif-card glass-card rounded-2xl p-6 transition-all hover:shadow-md border-l-4 border-l-purple-500" data-category="ASTS">
+      <div class="flex flex-wrap items-center justify-between gap-2 text-xs font-bold tracking-wider mb-2">
+        <span class="text-purple-600 uppercase flex items-center gap-1.5">
+          <span class="w-2 h-2 rounded-full bg-purple-500"></span> Materi ASTS
+        </span>
+        <div class="text-slate-400">2026 &bull; <span class="text-slate-700 font-extrabold">Materi ASTS</span></div>
+      </div>
+      <h2 class="text-xl font-bold text-slate-900 mb-2">Materi Seni Budaya</h2>
+      <p class="text-slate-600 text-sm leading-relaxed mb-6">
+        Materi persiapan ASTS 2026/2027 SMT 1
+      </p>
+      <div class="flex flex-wrap items-center justify-between pt-4 border-t border-purple-100/60 text-xs">
+        <span class="text-slate-500 font-medium">Destination &bull; Seni Budaya</span>
+        <button onclick="openModal('Materi', 'https://bg2129.github.io/SeniMusik/')" class="text-brand-purple font-bold flex items-center gap-1 hover:underline">
+          Open source
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+        </button>
+      </div>
+    </article>
+
+            <!-- Card 4: ASTS -->
+    <article class="notif-card glass-card rounded-2xl p-6 transition-all hover:shadow-md border-l-4 border-l-purple-500" data-category="ASTS">
+      <div class="flex flex-wrap items-center justify-between gap-2 text-xs font-bold tracking-wider mb-2">
+        <span class="text-purple-600 uppercase flex items-center gap-1.5">
+          <span class="w-2 h-2 rounded-full bg-purple-500"></span> Materi ASTS
+        </span>
+        <div class="text-slate-400">2026 &bull; <span class="text-slate-700 font-extrabold">Materi ASTS</span></div>
+      </div>
+      <h2 class="text-xl font-bold text-slate-900 mb-2">Materi Matematika</h2>
+      <p class="text-slate-600 text-sm leading-relaxed mb-6">
+        Materi persiapan ASTS 2026/2027 SMT 1
+      </p>
+      <div class="flex flex-wrap items-center justify-between pt-4 border-t border-purple-100/60 text-xs">
+        <span class="text-slate-500 font-medium">Destination &bull; Matematika</span>
+        <button onclick="openModal('Materi', 'https://bg2129.github.io/MumetMTK/')" class="text-brand-purple font-bold flex items-center gap-1 hover:underline">
+          Open source
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+        </button>
+      </div>
+    </article>
+
+            <!-- Card 5: ASTS -->
+    <article class="notif-card glass-card rounded-2xl p-6 transition-all hover:shadow-md border-l-4 border-l-purple-500" data-category="ASTS">
+      <div class="flex flex-wrap items-center justify-between gap-2 text-xs font-bold tracking-wider mb-2">
+        <span class="text-purple-600 uppercase flex items-center gap-1.5">
+          <span class="w-2 h-2 rounded-full bg-purple-500"></span> Materi ASTS
+        </span>
+        <div class="text-slate-400">2026 &bull; <span class="text-slate-700 font-extrabold">Materi ASTS</span></div>
+      </div>
+      <h2 class="text-xl font-bold text-slate-900 mb-2">Materi Bahasa Inggris</h2>
+      <p class="text-slate-600 text-sm leading-relaxed mb-6">
+        Materi persiapan ASTS 2026/2027 SMT 1
+      </p>
+      <div class="flex flex-wrap items-center justify-between pt-4 border-t border-purple-100/60 text-xs">
+        <span class="text-slate-500 font-medium">Destination &bull; Bahasa Inggris</span>
+        <button onclick="openModal('Materi', 'https://bg2129.github.io/BIng/')" class="text-brand-purple font-bold flex items-center gap-1 hover:underline">
+          Open source
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+        </button>
+      </div>
+    </article>
+
+            <!-- Card 6: ASTS -->
+    <article class="notif-card glass-card rounded-2xl p-6 transition-all hover:shadow-md border-l-4 border-l-purple-500" data-category="ASTS">
+      <div class="flex flex-wrap items-center justify-between gap-2 text-xs font-bold tracking-wider mb-2">
+        <span class="text-purple-600 uppercase flex items-center gap-1.5">
+          <span class="w-2 h-2 rounded-full bg-purple-500"></span> Materi ASTS
+        </span>
+        <div class="text-slate-400">2026 &bull; <span class="text-slate-700 font-extrabold">Materi ASTS</span></div>
+      </div>
+      <h2 class="text-xl font-bold text-slate-900 mb-2">Materi PJOK</h2>
+      <p class="text-slate-600 text-sm leading-relaxed mb-6">
+        Materi persiapan ASTS 2026/2027 SMT 1
+      </p>
+      <div class="flex flex-wrap items-center justify-between pt-4 border-t border-purple-100/60 text-xs">
+        <span class="text-slate-500 font-medium">Destination &bull; PJOK</span>
+        <button onclick="openModal('Materi', 'https://bg2129.github.io/PJOK/')" class="text-brand-purple font-bold flex items-center gap-1 hover:underline">
+          Open source
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+        </button>
+      </div>
+    </article>
+
+            <!-- Card 7: ASTS -->
+    <article class="notif-card glass-card rounded-2xl p-6 transition-all hover:shadow-md border-l-4 border-l-purple-500" data-category="ASTS">
+      <div class="flex flex-wrap items-center justify-between gap-2 text-xs font-bold tracking-wider mb-2">
+        <span class="text-purple-600 uppercase flex items-center gap-1.5">
+          <span class="w-2 h-2 rounded-full bg-purple-500"></span> Materi ASTS
+        </span>
+        <div class="text-slate-400">2026 &bull; <span class="text-slate-700 font-extrabold">Materi ASTS</span></div>
+      </div>
+      <h2 class="text-xl font-bold text-slate-900 mb-2">Materi Kimia</h2>
+      <p class="text-slate-600 text-sm leading-relaxed mb-6">
+        Materi persiapan ASTS 2026/2027 SMT 1
+      </p>
+      <div class="flex flex-wrap items-center justify-between pt-4 border-t border-purple-100/60 text-xs">
+        <span class="text-slate-500 font-medium">Destination &bull; Kimia</span>
+        <button onclick="openModal('Materi', 'https://bg2129.github.io/KimiaWOW/')" class="text-brand-purple font-bold flex items-center gap-1 hover:underline">
+          Open source
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+        </button>
+      </div>
+    </article>
+
+            <!-- Card 8: ASTS -->
+    <article class="notif-card glass-card rounded-2xl p-6 transition-all hover:shadow-md border-l-4 border-l-purple-500" data-category="ASTS">
+      <div class="flex flex-wrap items-center justify-between gap-2 text-xs font-bold tracking-wider mb-2">
+        <span class="text-purple-600 uppercase flex items-center gap-1.5">
+          <span class="w-2 h-2 rounded-full bg-purple-500"></span> Materi ASTS
+        </span>
+        <div class="text-slate-400">2026 &bull; <span class="text-slate-700 font-extrabold">Materi ASTS</span></div>
+      </div>
+      <h2 class="text-xl font-bold text-slate-900 mb-2">Materi Fisika</h2>
+      <p class="text-slate-600 text-sm leading-relaxed mb-6">
+        Materi persiapan ASTS 2026/2027 SMT 1
+      </p>
+      <div class="flex flex-wrap items-center justify-between pt-4 border-t border-purple-100/60 text-xs">
+        <span class="text-slate-500 font-medium">Destination &bull; Fisika</span>
+        <button onclick="openModal('Materi', 'https://bg2129.github.io/FisikaMbledos/')" class="text-brand-purple font-bold flex items-center gap-1 hover:underline">
+          Open source
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+        </button>
+      </div>
+    </article>
+
+            <!-- Card 9: ASTS -->
+    <article class="notif-card glass-card rounded-2xl p-6 transition-all hover:shadow-md border-l-4 border-l-purple-500" data-category="ASTS">
+      <div class="flex flex-wrap items-center justify-between gap-2 text-xs font-bold tracking-wider mb-2">
+        <span class="text-purple-600 uppercase flex items-center gap-1.5">
+          <span class="w-2 h-2 rounded-full bg-purple-500"></span> Materi ASTS
+        </span>
+        <div class="text-slate-400">2026 &bull; <span class="text-slate-700 font-extrabold">Materi ASTS</span></div>
+      </div>
+      <h2 class="text-xl font-bold text-slate-900 mb-2">Materi Pendidikan Pancasila</h2>
+      <p class="text-slate-600 text-sm leading-relaxed mb-6">
+        Materi persiapan ASTS 2026/2027 SMT 1
+      </p>
+      <div class="flex flex-wrap items-center justify-between pt-4 border-t border-purple-100/60 text-xs">
+        <span class="text-slate-500 font-medium">Destination &bull; PKN</span>
+        <button onclick="openModal('Materi', 'https://bg2129.github.io/PKN/')" class="text-brand-purple font-bold flex items-center gap-1 hover:underline">
+          Open source
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+        </button>
+      </div>
+    </article>
+
+            <!-- Card 10: ASTS -->
+    <article class="notif-card glass-card rounded-2xl p-6 transition-all hover:shadow-md border-l-4 border-l-purple-500" data-category="ASTS">
+      <div class="flex flex-wrap items-center justify-between gap-2 text-xs font-bold tracking-wider mb-2">
+        <span class="text-purple-600 uppercase flex items-center gap-1.5">
+          <span class="w-2 h-2 rounded-full bg-purple-500"></span> Materi ASTS
+        </span>
+        <div class="text-slate-400">2026 &bull; <span class="text-slate-700 font-extrabold">Materi ASTS</span></div>
+      </div>
+      <h2 class="text-xl font-bold text-slate-900 mb-2">Materi Informatika</h2>
+      <p class="text-slate-600 text-sm leading-relaxed mb-6">
+        Materi persiapan ASTS 2026/2027 SMT 1
+      </p>
+      <div class="flex flex-wrap items-center justify-between pt-4 border-t border-purple-100/60 text-xs">
+        <span class="text-slate-500 font-medium">Destination &bull; Informatika</span>
+        <button onclick="openModal('Materi', 'https://bg2129.github.io/Infor-WokWi/')" class="text-brand-purple font-bold flex items-center gap-1 hover:underline">
+          Open source
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+        </button>
+      </div>
+    </article>
+
+            <!-- Card 11: ASTS -->
+    <article class="notif-card glass-card rounded-2xl p-6 transition-all hover:shadow-md border-l-4 border-l-purple-500" data-category="ASTS">
+      <div class="flex flex-wrap items-center justify-between gap-2 text-xs font-bold tracking-wider mb-2">
+        <span class="text-purple-600 uppercase flex items-center gap-1.5">
+          <span class="w-2 h-2 rounded-full bg-purple-500"></span> Materi ASTS
+        </span>
+        <div class="text-slate-400">2026 &bull; <span class="text-slate-700 font-extrabold">Materi ASTS</span></div>
+      </div>
+      <h2 class="text-xl font-bold text-slate-900 mb-2">Materi Matematika Lanjut</h2>
+      <p class="text-slate-600 text-sm leading-relaxed mb-6">
+        Materi persiapan ASTS 2026/2027 SMT 1
+      </p>
+      <div class="flex flex-wrap items-center justify-between pt-4 border-t border-purple-100/60 text-xs">
+        <span class="text-slate-500 font-medium">Destination &bull; MatLan</span>
+        <button onclick="openModal('Materi', 'https://bg2129.github.io/MatLan-easy/')" class="text-brand-purple font-bold flex items-center gap-1 hover:underline">
+          Open source
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+        </button>
+      </div>
+    </article>
+
+            <!-- Card 12: ASTS -->
+    <article class="notif-card glass-card rounded-2xl p-6 transition-all hover:shadow-md border-l-4 border-l-purple-500" data-category="ASTS">
+      <div class="flex flex-wrap items-center justify-between gap-2 text-xs font-bold tracking-wider mb-2">
+        <span class="text-purple-600 uppercase flex items-center gap-1.5">
+          <span class="w-2 h-2 rounded-full bg-purple-500"></span> Materi ASTS
+        </span>
+        <div class="text-slate-400">2026 &bull; <span class="text-slate-700 font-extrabold">Materi ASTS</span></div>
+      </div>
+      <h2 class="text-xl font-bold text-slate-900 mb-2">Materi Pendidikan Agama Islam</h2>
+      <p class="text-slate-600 text-sm leading-relaxed mb-6">
+        Materi persiapan ASTS 2026/2027 SMT 1
+      </p>
+      <div class="flex flex-wrap items-center justify-between pt-4 border-t border-purple-100/60 text-xs">
+        <span class="text-slate-500 font-medium">Destination &bull; PAI</span>
+        <button onclick="openModal('Materi', 'https://bg2129.github.io/PAIslam/')" class="text-brand-purple font-bold flex items-center gap-1 hover:underline">
+          Open source
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+        </button>
+      </div>
+    </article>
+
+            <!-- Card 13: ASTS -->
+    <article class="notif-card glass-card rounded-2xl p-6 transition-all hover:shadow-md border-l-4 border-l-purple-500" data-category="ASTS">
+      <div class="flex flex-wrap items-center justify-between gap-2 text-xs font-bold tracking-wider mb-2">
+        <span class="text-purple-600 uppercase flex items-center gap-1.5">
+          <span class="w-2 h-2 rounded-full bg-purple-500"></span> Materi ASTS
+        </span>
+        <div class="text-slate-400">2026 &bull; <span class="text-slate-700 font-extrabold">Materi ASTS</span></div>
+      </div>
+      <h2 class="text-xl font-bold text-slate-900 mb-2">Materi Sejarah</h2>
+      <p class="text-slate-600 text-sm leading-relaxed mb-6">
+        Materi persiapan ASTS 2026/2027 SMT 1
+      </p>
+      <div class="flex flex-wrap items-center justify-between pt-4 border-t border-purple-100/60 text-xs">
+        <span class="text-slate-500 font-medium">Destination &bull; Sejarah</span>
+        <button onclick="openModal('Materi', 'https://bg2129.github.io/SejarahHh/')" class="text-brand-purple font-bold flex items-center gap-1 hover:underline">
+          Open source
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+        </button>
+      </div>
+    </article>
+
+
+    <!-- Card 1: Latsol -->
+     <article class="notif-card glass-card rounded-2xl p-6 transition-all hover:shadow-md border-l-4 border-l-amber-500" data-category="LATSOL">
+      <div class="flex flex-wrap items-center justify-between gap-2 text-xs font-bold tracking-wider mb-2">
+        <span class="text-amber-600 uppercase flex items-center gap-1.5">
+          <span class="w-2 h-2 rounded-full bg-amber-500"></span> LatSol TKA
+        </span>
+        <div class="text-slate-400">2026 &bull; <span class="text-slate-700 font-extrabold">LATSOL TKA</span></div>
+      </div>
+      <h2 class="text-xl font-bold text-slate-900 mb-2">KUMPULAN LATIHAN SOAL TKA PKN PILIHAN</h2>
+      <p class="text-slate-600 text-sm leading-relaxed mb-6">
+        KUMPULAN LATIHAN SOAL TKA PKN WAJIB SMA
+      </p>
+      <div class="flex flex-wrap items-center justify-between pt-4 border-t border-amber-100/60 text-xs">
+        <span class="text-slate-500 font-medium">Destination &bull; KUMPULAN LATSOL TKA PKN</span>
+        <button onclick="openModal('Latihan Soal', 'https://bg2129.github.io/LatsolKu---PKN/')" class="text-amber-600 font-bold flex items-center gap-1 hover:underline">
+          Open source
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+        </button>
+      </div>
+    </article>
+  
+    <!-- Card 2: Latsol -->
+     <article class="notif-card glass-card rounded-2xl p-6 transition-all hover:shadow-md border-l-4 border-l-amber-500" data-category="LATSOL">
+      <div class="flex flex-wrap items-center justify-between gap-2 text-xs font-bold tracking-wider mb-2">
+        <span class="text-amber-600 uppercase flex items-center gap-1.5">
+          <span class="w-2 h-2 rounded-full bg-amber-500"></span> LatSol TKA
+        </span>
+        <div class="text-slate-400">2025 &bull; <span class="text-slate-700 font-extrabold">LATSOL TKA</span></div>
+      </div>
+      <h2 class="text-xl font-bold text-slate-900 mb-2">LATIHAN SOAL TKA BIOLOGI</h2>
+      <p class="text-slate-600 text-sm leading-relaxed mb-6">
+        SOAL TKA BIOLOGI SMA 2025
+      </p>
+      <div class="flex flex-wrap items-center justify-between pt-4 border-t border-amber-100/60 text-xs">
+        <span class="text-slate-500 font-medium">Destination &bull; LATSOL TKA BIOLOGI</span>
+        <button onclick="openModal('Latihan Soal', 'https://drive.google.com/file/d/1Noq7D6Qey5x97hemMjt-UtwMPeIpiUvM/view?usp=drive_link')" class="text-amber-600 font-bold flex items-center gap-1 hover:underline">
+          Open source
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+        </button>
+      </div>
+    </article>
+
+    <!-- Card 3: Latsol -->
+     <article class="notif-card glass-card rounded-2xl p-6 transition-all hover:shadow-md border-l-4 border-l-amber-500" data-category="LATSOL">
+      <div class="flex flex-wrap items-center justify-between gap-2 text-xs font-bold tracking-wider mb-2">
+        <span class="text-amber-600 uppercase flex items-center gap-1.5">
+          <span class="w-2 h-2 rounded-full bg-amber-500"></span> LatSol TKA
+        </span>
+        <div class="text-slate-400">2026 &bull; <span class="text-slate-700 font-extrabold">LATSOL TKA</span></div>
+      </div>
+      <h2 class="text-xl font-bold text-slate-900 mb-2">LATIHAN SOAL TKA KIMIA</h2>
+      <p class="text-slate-600 text-sm leading-relaxed mb-6">
+        LATIHAN SOAL TKA KIMIA SMA 2026
+      </p>
+      <div class="flex flex-wrap items-center justify-between pt-4 border-t border-amber-100/60 text-xs">
+        <span class="text-slate-500 font-medium">Destination &bull; LATSOL TKA KIMIA</span>
+        <button onclick="openModal('Latihan Soal', 'https://docs.google.com/document/d/1CZyLNjfm45rjthzVEbYrxkwj3QSpawkz/edit?usp=drive_link&ouid=100834121181983776573&rtpof=true&sd=true')" class="text-amber-600 font-bold flex items-center gap-1 hover:underline">
+          Open source
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+        </button>
+      </div>
+    </article>
+
+    <!-- Card 4: Latsol -->
+     <article class="notif-card glass-card rounded-2xl p-6 transition-all hover:shadow-md border-l-4 border-l-amber-500" data-category="LATSOL">
+      <div class="flex flex-wrap items-center justify-between gap-2 text-xs font-bold tracking-wider mb-2">
+        <span class="text-amber-600 uppercase flex items-center gap-1.5">
+          <span class="w-2 h-2 rounded-full bg-amber-500"></span> LatSol TKA
+        </span>
+        <div class="text-slate-400">2026 &bull; <span class="text-slate-700 font-extrabold">LATSOL TKA</span></div>
+      </div>
+      <h2 class="text-xl font-bold text-slate-900 mb-2">KUMPULAN LATIHAN SOAL TKA BAHASA INDONESIA WAJIB</h2>
+      <p class="text-slate-600 text-sm leading-relaxed mb-6">
+        KUMPULAN LATIHAN SOAL TKA B.INDO WAJIB SMA
+      </p>
+      <div class="flex flex-wrap items-center justify-between pt-4 border-t border-amber-100/60 text-xs">
+        <span class="text-slate-500 font-medium">Destination &bull; KUMPULAN LATSOL TKA BAHASA INDONESIA</span>
+        <button onclick="openModal('Latihan Soal', 'https://bg2129.github.io/LatsolKu-BINDO/')" class="text-amber-600 font-bold flex items-center gap-1 hover:underline">
+          Open source
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+        </button>
+      </div>
+    </article>
+
+    <!-- Card 6: Latsol -->
+     <!-- <article class="notif-card glass-card rounded-2xl p-6 transition-all hover:shadow-md border-l-4 border-l-amber-500" data-category="LATSOL">
+      <div class="flex flex-wrap items-center justify-between gap-2 text-xs font-bold tracking-wider mb-2">
+        <span class="text-amber-600 uppercase flex items-center gap-1.5">
+          <span class="w-2 h-2 rounded-full bg-amber-500"></span> LatSol TKA
+        </span>
+        <div class="text-slate-400">2025 &bull; <span class="text-slate-700 font-extrabold">LATSOL TKA</span></div>
+      </div>
+      <h2 class="text-xl font-bold text-slate-900 mb-2">LATIHAN SOAL TKA BAHASA INDONESIA PILIHAN</h2>
+      <p class="text-slate-600 text-sm leading-relaxed mb-6">
+        LATIHAN SOAL TKA B.INDO WAJIB SMA 2025
+      </p>
+      <div class="flex flex-wrap items-center justify-between pt-4 border-t border-amber-100/60 text-xs">
+        <span class="text-slate-500 font-medium">Destination &bull; LATSOL TKA BAHASA INDONESIA</span>
+        <button onclick="openModal('Latihan Soal', 'https://drive.google.com/file/d/1oUfMRprDaE5WRXj7rI9CM8Un2wFYtupB/view?usp=drive_link')" class="text-amber-600 font-bold flex items-center gap-1 hover:underline">
+          Open source
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+        </button>
+      </div>
+    </article> -->
+
+    <!-- Card 7: Latsol -->
+     <!-- <article class="notif-card glass-card rounded-2xl p-6 transition-all hover:shadow-md border-l-4 border-l-amber-500" data-category="LATSOL">
+      <div class="flex flex-wrap items-center justify-between gap-2 text-xs font-bold tracking-wider mb-2">
+        <span class="text-amber-600 uppercase flex items-center gap-1.5">
+          <span class="w-2 h-2 rounded-full bg-amber-500"></span> LatSol TKA
+        </span>
+        <div class="text-slate-400">2026 &bull; <span class="text-slate-700 font-extrabold">LATSOL TKA</span></div>
+      </div>
+      <h2 class="text-xl font-bold text-slate-900 mb-2">SIMULASI SOAL TKA-4 BAHASA INDONESIA</h2>
+      <p class="text-slate-600 text-sm leading-relaxed mb-6">
+        LATIHAN SOAL SIMULASI TKA B.INDO WAJIB SMA 2026
+      </p>
+      <div class="flex flex-wrap items-center justify-between pt-4 border-t border-amber-100/60 text-xs">
+        <span class="text-slate-500 font-medium">Destination &bull; LATSOL TKA BAHASA INDONESIA</span>
+        <button onclick="openModal('Latihan Soal', 'https://drive.google.com/file/d/1LhiRKy8a34V0N9uVXIaF4bD5qICBMF85/view?usp=drive_link')" class="text-amber-600 font-bold flex items-center gap-1 hover:underline">
+          Open source
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+        </button>
+      </div>
+    </article> -->
+    
+    <!-- Card 8: Latsol -->
+     <!-- <article class="notif-card glass-card rounded-2xl p-6 transition-all hover:shadow-md border-l-4 border-l-amber-500" data-category="LATSOL">
+      <div class="flex flex-wrap items-center justify-between gap-2 text-xs font-bold tracking-wider mb-2">
+        <span class="text-amber-600 uppercase flex items-center gap-1.5">
+          <span class="w-2 h-2 rounded-full bg-amber-500"></span> LatSol TKA
+        </span>
+        <div class="text-slate-400">2026 &bull; <span class="text-slate-700 font-extrabold">LATSOL TKA</span></div>
+      </div>
+      <h2 class="text-xl font-bold text-slate-900 mb-2">SIMULASI SOAL TKA-5 BAHASA INDONESIA</h2>
+      <p class="text-slate-600 text-sm leading-relaxed mb-6">
+        LATIHAN SOAL SIMULASI TKA B.INDO WAJIB SMA 2026
+      </p>
+      <div class="flex flex-wrap items-center justify-between pt-4 border-t border-amber-100/60 text-xs">
+        <span class="text-slate-500 font-medium">Destination &bull; LATSOL TKA BAHASA INDONESIA</span>
+        <button onclick="openModal('Latihan Soal', 'https://drive.google.com/file/d/1rqFpVrZ68h70LTyObqxaAD12nTXf5bp_/view?usp=drive_link')" class="text-amber-600 font-bold flex items-center gap-1 hover:underline">
+          Open source
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+        </button>
+      </div>
+    </article> -->
+
+    <!-- Card 9: Latsol -->
+     <!-- <article class="notif-card glass-card rounded-2xl p-6 transition-all hover:shadow-md border-l-4 border-l-amber-500" data-category="LATSOL">
+      <div class="flex flex-wrap items-center justify-between gap-2 text-xs font-bold tracking-wider mb-2">
+        <span class="text-amber-600 uppercase flex items-center gap-1.5">
+          <span class="w-2 h-2 rounded-full bg-amber-500"></span> LatSol TKA
+        </span>
+        <div class="text-slate-400">2026 &bull; <span class="text-slate-700 font-extrabold">LATSOL TKA</span></div>
+      </div>
+      <h2 class="text-xl font-bold text-slate-900 mb-2">SIMULASI SOAL TKA-6 BAHASA INDONESIA</h2>
+      <p class="text-slate-600 text-sm leading-relaxed mb-6">
+        LATIHAN SOAL SIMULASI TKA B.INDO WAJIB SMA 2026
+      </p>
+      <div class="flex flex-wrap items-center justify-between pt-4 border-t border-amber-100/60 text-xs">
+        <span class="text-slate-500 font-medium">Destination &bull; LATSOL TKA BAHASA INDONESIA</span>
+        <button onclick="openModal('Latihan Soal', 'https://drive.google.com/file/d/1xBlBKSscPoJh1EW9L16aNoA6eT-Av1fE/view?usp=drive_link')" class="text-amber-600 font-bold flex items-center gap-1 hover:underline">
+          Open source
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+        </button>
+      </div>
+    </article> -->
+
+    <!-- Card 10: Latsol -->
+     <!-- <article class="notif-card glass-card rounded-2xl p-6 transition-all hover:shadow-md border-l-4 border-l-amber-500" data-category="LATSOL">
+      <div class="flex flex-wrap items-center justify-between gap-2 text-xs font-bold tracking-wider mb-2">
+        <span class="text-amber-600 uppercase flex items-center gap-1.5">
+          <span class="w-2 h-2 rounded-full bg-amber-500"></span> LatSol TKA
+        </span>
+        <div class="text-slate-400">2026 &bull; <span class="text-slate-700 font-extrabold">LATSOL TKA</span></div>
+      </div>
+      <h2 class="text-xl font-bold text-slate-900 mb-2">SIMULASI SOAL TKA-6 BAHASA INDONESIA</h2>
+      <p class="text-slate-600 text-sm leading-relaxed mb-6">
+        LATIHAN SOAL SIMULASI TKA B.INDO WAJIB SMA 2026
+      </p>
+      <div class="flex flex-wrap items-center justify-between pt-4 border-t border-amber-100/60 text-xs">
+        <span class="text-slate-500 font-medium">Destination &bull; LATSOL TKA BAHASA INDONESIA</span>
+        <button onclick="openModal('Latihan Soal', 'https://drive.google.com/file/d/1xBlBKSscPoJh1EW9L16aNoA6eT-Av1fE/view?usp=drive_link')" class="text-amber-600 font-bold flex items-center gap-1 hover:underline">
+          Open source
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+        </button>
+      </div>
+    </article>
+     -->
+    <!-- Card 11: Latsol -->
+    <!-- Card 12: Latsol -->
+    
+
+    <!-- Card 1: Materi -->
+    <article class="notif-card glass-card rounded-2xl p-6 transition-all hover:shadow-md border-l-4 border-l-emerald-500" data-category="VIDEO">
+      <div class="flex flex-wrap items-center justify-between gap-2 text-xs font-bold tracking-wider mb-2">
+        <span class="text-emerald-600 uppercase flex items-center gap-1.5">
+          <span class="w-2 h-2 rounded-full bg-emerald-500"></span> Materi
+        </span>
+        <div class="text-slate-400">2025 &bull; <span class="text-slate-700 font-extrabold">Materi</span></div>
+      </div>
+      <h2 class="text-xl font-bold text-slate-900 mb-2">Modul TKA 2025</h2>
+      <p class="text-slate-600 text-sm leading-relaxed mb-6">
+        Materi Modul TKA SMA/MA/SMK TAHUN 2025
+      </p>
+      <div class="flex flex-wrap items-center justify-between pt-4 border-t border-blue-100/60 text-xs">
+        <span class="text-slate-500 font-medium">Destination &bull; Modul TKA 2025</span>
+        <button onclick="openModal('Materi', 'https://drive.google.com/file/d/10cSNMm3-D8JwjrvQwVuqiMMueQQj7o55/view?usp=sharing')" class="text-brand-blue font-bold flex items-center gap-1 hover:underline">
+          Open source
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+        </button>
+      </div>
+    </article>
+
+    <!-- Card 2: Materi -->
+    <article class="notif-card glass-card rounded-2xl p-6 transition-all hover:shadow-md border-l-4 border-l-emerald-500" data-category="VIDEO">
+      <div class="flex flex-wrap items-center justify-between gap-2 text-xs font-bold tracking-wider mb-2">
+        <span class="text-emerald-600 uppercase flex items-center gap-1.5">
+          <span class="w-2 h-2 rounded-full bg-emerald-500"></span> Materi
+        </span>
+        <div class="text-slate-400">29/07/26 &bull; <span class="text-slate-700 font-extrabold">Video Penjelasan</span></div>
+      </div>
+      <h2 class="text-xl font-bold text-slate-900 mb-2">Video Penjelasan TKA Biologi</h2>
+      <p class="text-slate-600 text-sm leading-relaxed mb-6">
+        Video penjelasan mengenai Materi Biologi TKA SMA/MA/SMK
+      </p>
+      <div class="flex flex-wrap items-center justify-between pt-4 border-t border-blue-100/60 text-xs">
+        <span class="text-slate-500 font-medium">Destination &bull; Laksana 10 Jam Bacain Materi Biologi TKA SMA</span>
+        <button onclick="openModal('Materi', 'https://youtu.be/lfJug7Dquws?si=qjWPz2CTuHYYzAB6')" class="text-brand-blue font-bold flex items-center gap-1 hover:underline">
+          Open source
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+        </button>
+      </div>
+    </article>
+
+    <!-- Card 3: Materi -->
+    <article class="notif-card glass-card rounded-2xl p-6 transition-all hover:shadow-md border-l-4 border-l-emerald-500" data-category="VIDEO">
+      <div class="flex flex-wrap items-center justify-between gap-2 text-xs font-bold tracking-wider mb-2">
+        <span class="text-emerald-600 uppercase flex items-center gap-1.5">
+          <span class="w-2 h-2 rounded-full bg-emerald-500"></span> Materi
+        </span>
+        <div class="text-slate-400">29/07/26 &bull; <span class="text-slate-700 font-extrabold">Video Penjelasan</span></div>
+      </div>
+      <h2 class="text-xl font-bold text-slate-900 mb-2">Video Penjelasan TKA B. Indo & Inggris</h2>
+      <p class="text-slate-600 text-sm leading-relaxed mb-6">
+        Video penjelasan mengenai Materi B. Indo & Inggris TKA SMA/MA/SMK
+      </p>
+      <div class="flex flex-wrap items-center justify-between pt-4 border-t border-blue-100/60 text-xs">
+        <span class="text-slate-500 font-medium">Destination &bull; Bacain Materi B. Indo & Inggris TKA-SMA</span>
+        <button onclick="openModal('Materi', 'https://youtu.be/yo8pdKDnWW0?si=syiDje-RUSS19HW2')" class="text-brand-blue font-bold flex items-center gap-1 hover:underline">
+          Open source
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+        </button>
+      </div>
+    </article>
+
+    <!-- Card 4: Materi -->
+    <article class="notif-card glass-card rounded-2xl p-6 transition-all hover:shadow-md border-l-4 border-l-emerald-500" data-category="VIDEO">
+      <div class="flex flex-wrap items-center justify-between gap-2 text-xs font-bold tracking-wider mb-2">
+        <span class="text-emerald-600 uppercase flex items-center gap-1.5">
+          <span class="w-2 h-2 rounded-full bg-emerald-500"></span> Materi
+        </span>
+        <div class="text-slate-400">10/01/26 &bull; <span class="text-slate-700 font-extrabold">Video Penjelasan</span></div>
+      </div>
+      <h2 class="text-xl font-bold text-slate-900 mb-2">Video Penjelasan PK-PM UTBK-SNBT</h2>
+      <p class="text-slate-600 text-sm leading-relaxed mb-6">
+        Video penjelasan mengenai Materi PK-PM UTBK-SNBT SMA/MA/SMK
+      </p>
+      <div class="flex flex-wrap items-center justify-between pt-4 border-t border-blue-100/60 text-xs">
+        <span class="text-slate-500 font-medium">Destination &bull; Anak UGM 8 Jam Bacain Kamu Materi PK-PM UTBK-SNBT!</span>
+        <button onclick="openModal('Materi', 'https://youtu.be/uEb4eqHhqO0?si=CcjnITnGlh3Dgoxy')" class="text-brand-blue font-bold flex items-center gap-1 hover:underline">
+          Open source
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+        </button>
+      </div>
+    </article>
+
+    <!-- Card 5: Materi -->
+    <article class="notif-card glass-card rounded-2xl p-6 transition-all hover:shadow-md border-l-4 border-l-emerald-500" data-category="VIDEO">
+      <div class="flex flex-wrap items-center justify-between gap-2 text-xs font-bold tracking-wider mb-2">
+        <span class="text-emerald-600 uppercase flex items-center gap-1.5">
+          <span class="w-2 h-2 rounded-full bg-emerald-500"></span> Materi
+        </span>
+        <div class="text-slate-400">31/12/25 &bull; <span class="text-slate-700 font-extrabold">Video Penjelasan</span></div>
+      </div>
+      <h2 class="text-xl font-bold text-slate-900 mb-2">Video Penjelasan LBE UTBK-SNBT</h2>
+      <p class="text-slate-600 text-sm leading-relaxed mb-6">
+        Video penjelasan mengenai Materi LBE UTBK-SNBT SMA/MA/SMK
+      </p>
+      <div class="flex flex-wrap items-center justify-between pt-4 border-t border-blue-100/60 text-xs">
+        <span class="text-slate-500 font-medium">Destination &bull; Anak UGM 7 Jam Bacain Kamu Materi LBE UTBK-SNBT!</span>
+        <button onclick="openModal('Materi', 'https://youtu.be/UFCv9S8KtDQ?si=xt5fWe437Z0XCfOf')" class="text-brand-blue font-bold flex items-center gap-1 hover:underline">
+          Open source
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+        </button>
+      </div>
+    </article>
+  </main>
+
+  <!-- DONATION BANNER SECTION -->
+  <section class="max-w-4xl mx-auto px-4 sm:px-8 mt-12">
+    <div class="glass-card rounded-3xl p-8 text-center relative overflow-hidden border-amber-200/50 shadow-sm transition-transform hover:shadow-md">
+      <!-- Ornamen Dekoratif -->
+      <div class="absolute -top-12 -right-12 w-32 h-32 bg-amber-200 rounded-full mix-blend-multiply filter blur-2xl opacity-50 pointer-events-none"></div>
+      <div class="absolute -bottom-12 -left-12 w-32 h-32 bg-orange-200 rounded-full mix-blend-multiply filter blur-2xl opacity-50 pointer-events-none"></div>
+
+      <div class="relative z-10">
+        <span class="text-4xl mb-3 block animate-bounce">☕</span>
+        <h2 class="text-2xl font-extrabold text-slate-900 mb-2">Terbantu dengan rangkuman materi ini?</h2>
+        <p class="text-slate-600 text-sm max-w-lg mx-auto mb-6 leading-relaxed">
+          Kumpulan materi dan soal PTN ini dibagikan gratis untuk pejuang UTBK. Jika terbantu, dukung Nipp dengan mentraktir segelas kopi agar makin semangat membagikan materi!
+        </p>
+        <!-- GANTI LINK INI DENGAN LINK SOCIABUZZ KAMU -->
+        <a href="https://sociabuzz.com/nipp21/tribe" target="_blank" class="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-bold text-white bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 shadow-lg hover:shadow-orange-500/30 transition-all transform hover:-translate-y-1">
+          Dukung via SociaBuzz
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- RESOURCE TERMINAL FOOTER -->
+  <footer class="max-w-4xl mx-auto px-4 sm:px-8 mt-12 pt-10 border-t border-blue-200/60 text-center">
+    <div class="text-xs font-bold tracking-widest text-blue-600 uppercase mb-2">Good Luck Guys</div>
+    <h3 class="text-2xl font-extrabold text-slate-800 mb-4">SIAP MEMASAK TKA DAN SNBT</h3>
+    <div class="flex justify-center gap-6 text-sm font-semibold text-brand-blue mb-8">
+      <a href="#" class="hover:underline">TKA</a>
+      <a href="#" class="hover:underline">SNBT</a>
+      <a href="#" class="hover:underline">CizawRawr</a>
+    </div>
+    <div class="text-xs text-slate-400">
+      Made By Nipp &bull; 2026 &bull; OTW PTN IMPIAN<br> <span class="text-emerald-500 font-semibold">Let's Go..</span>
+    </div>
+  </footer>
+
+  <!-- FLOATING DOCK -->
+  <nav class="fixed bottom-6 left-1/2 -translate-x-1/2 z-40">
+    <div class="glass-dock px-3 py-2 rounded-full shadow-lg flex items-center gap-2">
+      <!-- Tombol Search (Existing) -->
+      <button onclick="scrollToSearch()" class="px-4 py-1.5 rounded-full text-xs font-bold text-slate-600 hover:bg-blue-50/60 transition-colors flex items-center gap-1.5">
+        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg> Search
+      </button>
+      
+      <!-- Divider -->
+      <div class="w-px h-5 bg-blue-200/80"></div>
+      
+      <!-- Tombol Donasi di Floating Dock -->
+      <!-- GANTI LINK INI DENGAN LINK SOCIABUZZ KAMU -->
+      <a href="https://sociabuzz.com/nipp21" target="_blank" class="px-4 py-1.5 rounded-full text-xs font-bold text-white bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 shadow-md transition-all flex items-center gap-1.5 hover-wiggle">
+        ☕ Traktir Kopi
+      </a>
+    </div>
+  </nav>
+
+  <!-- MODAL / ROUTING OVERLAY -->
+  <div id="routingModal" class="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/40 backdrop-blur-sm hidden">
+    <div class="glass-card bg-white rounded-2xl p-6 max-w-sm w-full mx-4 shadow-xl border border-blue-100 text-center">
+      <div class="w-12 h-12 rounded-full bg-blue-100 text-brand-blue flex items-center justify-center mx-auto mb-4 animate-bounce">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/></svg>
+      </div>
+      <h3 class="text-lg font-bold text-slate-900 mb-1">Direct Link Verification</h3>
+      <p class="text-sm text-slate-500 mb-4" id="modalText">Redirecting to verified source...</p>
+      <div class="flex gap-2">
+        <button onclick="closeModal()" class="flex-1 px-4 py-2 rounded-xl text-sm font-semibold bg-slate-100 text-slate-600 hover:bg-slate-200 transition-colors">
+          Cancel
+        </button>
+        <a id="confirmLink" href="#" target="_blank" onclick="closeModal()" class="flex-1 px-4 py-2 rounded-xl text-sm font-semibold bg-brand-blue text-white hover:bg-blue-700 transition-colors flex items-center justify-center gap-1">
+          Continue
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- SCRIPT INTERAKTIF -->
+  <script>
+    const searchInput = document.getElementById('searchInput');
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const cards = document.querySelectorAll('.notif-card');
+    const modal = document.getElementById('routingModal');
+    const modalText = document.getElementById('modalText');
+    const confirmLink = document.getElementById('confirmLink');
+    let activeCategory = 'all';
+
+    // 1. Logika Filter & Pencarian
+    function updateCards() {
+      const keyword = searchInput.value.toLowerCase();
+      
+      cards.forEach(card => {
+        const category = card.getAttribute('data-category');
+        const textContent = card.innerText.toLowerCase();
+        
+        const matchCategory = (activeCategory === 'all') || (category === activeCategory);
+        const matchKeyword = textContent.includes(keyword);
+        
+        if (matchCategory && matchKeyword) {
+          card.style.display = 'block';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+
+    // Event Listener Filter Kategori
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        // Hapus styling aktif dari semua tombol
+        filterBtns.forEach(b => {
+          b.className = 'filter-btn px-4 py-1.5 rounded-lg text-sm font-semibold bg-blue-100/50 text-slate-600 hover:bg-blue-100 transition-all';
+        });
+        // Atur styling tombol aktif
+        btn.className = 'filter-btn px-4 py-1.5 rounded-lg text-sm font-semibold bg-brand-blue text-white shadow-sm transition-all';
+        
+        activeCategory = btn.getAttribute('data-filter');
+        updateCards();
+      });
+    });
+
+    // Event Listener Live Search
+    searchInput.addEventListener('input', updateCards);
+
+    // 2. Logika Modal Direct Routing
+    function openModal(sourceName, url) {
+      modalText.innerText = `You are opening: ${sourceName}`;
+      confirmLink.setAttribute('href', url);
+      modal.classList.remove('hidden');
+    }
+
+    function closeModal() {
+      modal.classList.add('hidden');
+    }
+
+    // Tutup modal jika klik di latar belakang
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) closeModal();
+    });
+
+    // 3. Gulir ke bagian pencarian (dari tombol di Hero / Dock)
+    function scrollToSearch() {
+      document.getElementById('search-section').scrollIntoView({ behavior: 'smooth' });
+      setTimeout(() => searchInput.focus(), 500);
+    }
+  </script>
+</body>
+</html>
